@@ -1,0 +1,19 @@
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    <!--因为 Django 已经拥有一个用来防御它的非常容易使用的系统。 简而言之，所有针对内部 URL 的 POST 表单都应该使用 {% csrf_token %} 模板标签。-->
+{% csrf_token %}
+    <!--此反向关系的默认名称是choice_set（因为相关模型已命名Choice）。但您可以通过related_name在外键上指定kwarg 来覆盖此默认名称：-->
+
+<!--class Choice(models.Model):-->
+    <!--...-->
+    <!--question = models.ForeignKey(Question, related_name='choices')-->
+{% for choice in question.choice_set.all %}
+    <!--forloop.counter 指示 for 标签已经循环多少次。-->
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" />
+</form>
