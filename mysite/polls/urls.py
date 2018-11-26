@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 
 app_name = 'polls'
+'''
+如果你转到 "/polls/34/" ，Django 将会运行 detail() 方法并且展示你在 URL 里提供的问题 ID
+'''
 # urlpatterns=[    # ex: /polls/
 #     path('', views.index, name='index'),
 #     # ex: /polls/5/

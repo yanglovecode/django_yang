@@ -59,7 +59,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mysite.urls'
-
+'''
+默认的设置文件设置了 DjangoTemplates 后端，并将 APP_DIRS 设置成了 True。
+这一选项将会让 DjangoTemplates 在每个 INSTALLED_APPS 文件夹中寻找 "templates" 子目录
+'''
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -87,6 +90,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
+        # 数据库的名称
         'NAME': 'iCourtWeb',
         'USER': 'root',
         'PASSWORD': 'ywx920817',
