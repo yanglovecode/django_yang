@@ -12,7 +12,15 @@
     <!--question = models.ForeignKey(Question, related_name='choices')-->
 {% for choice in question.choice_set.all %}
     <!--forloop.counter 指示 for 标签已经循环多少次。-->
+    <!--<label> 标签为 input 元素定义标签（label）。
+    label 元素不会向用户呈现任何特殊的样式。不过，它为鼠标用户改善了可用性，
+    因为如果用户点击 label 元素内的文本，则会切换到控件本身。
+    <label> 标签的 for 属性应该等于相关元素的 id 元素，以便将它们捆绑起来
+    每个单选按钮的 name 是 "choice" 。这意味着，当有人选择一个单选按钮并提交表单提交时，
+    它将发送一个 POST 数据 choice=# ， 其中# 为选择的 Choice 的 ID。这是 HTML 表单的基本概念。-->
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+
+    <!--forloop.counter 指示 for 标签已经循环多少次。-->
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
 {% endfor %}
 <input type="submit" value="Vote" />

@@ -1,3 +1,15 @@
+'''
+render:载入模板，填充上下文，再返回由它生成的 HttpResponse 对象
+例：
+render(request, 'polls/index.html', context)
+
+get_object_or_404()¶:尝试用 get() 函数获取一个对象，如果不存在就抛出 Http404 错误也是一个普遍的流程
+例：
+question = get_object_or_404(Question, pk=question_id)
+
+'''
+
+
 # from django.shortcuts import render,get_object_or_404
 # from django.http import HttpResponse,HttpResponseRedirect
 # from .models import Question,Choice
@@ -60,7 +72,7 @@ from django.views import generic
 
 from .models import Choice, Question
 
-
+'''我们在这里使用两个通用视图： ListView 和 DetailView'''
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'

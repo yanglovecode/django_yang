@@ -1,6 +1,11 @@
 from django.urls import path
 from . import views
+'''
+Django 如何知道 {% url %} 标签到底对应哪一个应用的 URL 呢？
+答案：
+在根 URLconf 中添加命名空间。在 polls/urls.py 文件中稍作修改，加上 app_name 设置命名空间：
 
+'''
 app_name = 'polls'
 '''
 如果你转到 "/polls/34/" ，Django 将会运行 detail() 方法并且展示你在 URL 里提供的问题 ID
