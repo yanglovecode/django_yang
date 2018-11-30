@@ -71,15 +71,28 @@ from django.urls import reverse
 from django.views import generic
 
 from .models import Choice, Question
+from django.utils import timezone
 
 '''我们在这里使用两个通用视图： ListView 和 DetailView'''
+
+''''
+对于 DetailView ， question 变量会自动提供—— 因为我们使用 Django 的模型 (Question)， Django 能够为 context 变量决定一个合适的名字。
+然而对于 ListView， 自动生成的 context 变量是 question_list。为了覆盖这个行为，我们提供 context_object_name 属性，表示我们想使用 latest_question_list。作为一种替换方案，你可以改变你的模板来匹配新的 context 变量 —— 这是一种更便捷的方法，告诉 Django 使用你想使用的变量名。
+'''
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
         """Return the last five published questions."""
-        return Question.objects.order_by('-pub_date')[:5]
+        # return Question.objects.order_by('-pub_date')[:5]
+
+        '''
+        returns a queryset containing Questions whose pub_date is less than or equal to - that is, earlier than or equal to - timezone.now.
+        '''
+        return Question.objects.filter(
+            pub_date__lte=timezone.now()
+        ).order_by('-pub_date')[:5]
 
 
 class DetailView(generic.DetailView):
