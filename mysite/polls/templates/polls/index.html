@@ -1,3 +1,9 @@
+<header>
+    <!--{  % static %  } 模板标签会生成静态文件的绝对路径。-->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+</header>
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}

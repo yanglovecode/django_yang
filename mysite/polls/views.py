@@ -99,6 +99,11 @@ class DetailView(generic.DetailView):
     model = Question
     # template_name属性是用来告诉Django使用一个指定的模板名字，而不是自动生成的默认名字
     template_name = 'polls/detail.html'
+    def get_queryset(self):
+        """
+        Excludes any questions that aren't published yet.
+        """
+        return Question.objects.filter(pub_date__lte=timezone.now())
 
 
 class ResultsView(generic.DetailView):
