@@ -11,9 +11,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
-import os
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -66,7 +68,8 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        #因为APP_DIRS被置为True，Django 会自动在每个应用包内递归查找templates/ 子目录（不要忘了 django.contrib.admin 也是一个应用）。
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
